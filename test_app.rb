@@ -5,6 +5,8 @@ class TestApp < Sinatra::Base
 
   register Sinatra::CrossOrigin
 
+  ALLOWEDORIGINS = %w[http://localhost:3006 https://day103-17200-sql-142h.dv.lan http://adc6170583.us.oracle.com:7003/]
+
 
   options "*" do
     response.headers["Allow"] = "HEAD,GET,PUT,POST,DELETE,OPTIONS"
@@ -19,12 +21,12 @@ class TestApp < Sinatra::Base
   end
 
   get '/crossdomain' do
-    cross_origin :allow_origin => 'http://localhost:3006',:allowmethods => [:get],:allowcredentials => false
+    cross_origin :allow_origin => ALLOWEDORIGINS,:allowmethods => [:get],:allowcredentials => false
     "Cross domain request received."
   end
 
   post '/crossdomain' do
-    cross_origin :allow_origin => 'http://localhost:3006',:allowmethods => [:post],:allowcredentials => true
+    cross_origin :allow_origin => ALLOWEDORIGINS,:allowmethods => [:post],:allowcredentials => true
     "Cross domian post request received."
   end
 
