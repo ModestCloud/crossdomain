@@ -1,11 +1,11 @@
 require 'sinatra/base'
-require 'sinatra/cross_origin'
+require 'cross_origin'
 
 class TestApp < Sinatra::Base
 
   register Sinatra::CrossOrigin
 
-  ALLOWEDORIGINS = %w[http://localhost:3006 https://day103-17200-sql-142h.dv.lan http://adc6170583.us.oracle.com:7003/]
+  ALLOWEDORIGINS = ["https://day103-17200-sql-142h.dv.lan", "http://localhost:3006", "http://adc6170583.us.oracle.com:7003"]
 
 
   options "*" do
