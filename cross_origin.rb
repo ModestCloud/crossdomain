@@ -56,7 +56,7 @@ module Sinatra
 
       app.set :cross_origin, false
       app.set :allow_origin, :any
-      app.set :allow_methods, [:post, :get, :options]
+      app.set :allow_methods, [:post, :get, :options, :put]
       app.set :allow_credentials, true
       app.set :allow_headers, ["*", "Content-Type", "Accept", "AUTHORIZATION", "Cache-Control"]
       app.set :max_age, 1728000

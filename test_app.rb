@@ -9,9 +9,17 @@ class TestApp < Sinatra::Base
 
 
   options "*" do
+    cross_origin
     response.headers["Allow"] = "HEAD,GET,PUT,POST,DELETE,OPTIONS"
 
     response.headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept"
+    #cross_origin :allow_origin => ALLOWEDORIGINS, :allowmethods => [:put]
+
+    request_origin = request.env['HTTP_ORIGIN']
+
+    if ALLOWEDORIGINS.include?(request_origin)
+      response.headers["Access-Control-Allow-Origin"] = request_origin
+    end
 
     200
   end
@@ -28,6 +36,11 @@ class TestApp < Sinatra::Base
   post '/crossdomain' do
     cross_origin :allow_origin => ALLOWEDORIGINS,:allowmethods => [:post],:allowcredentials => true
     "Cross domian post request received."
+  end
+
+  put '/crossdomain' do
+    cross_origin :allow_origin => ALLOWEDORIGINS,:allowmethods => [:put],:allowcredentials => true
+    "Cross domian put request received."
   end
 
 end
